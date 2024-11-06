@@ -1,0 +1,54 @@
+<%- layout('layout') -%>
+<h2>Inbox</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Subject</th>
+            <th>From</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% emails.forEach(email => { %>
+            <tr>
+                <td><input type="checkbox" value="<%= email.id %>"></td>
+                <td><a href="/detail/<%= email.id %>"><%= email.subject || '(no subject)' %></a></td>
+                <td><%= email.sender_id %></td>
+                <td><%= email.date %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+<button id="delete-button">Delete Selected Emails</button>
+
+<script>
+    document.getElementById('delete-button').addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        const emailIds = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+        if (emailIds.length === 0) {
+            alert('Please select at least one email to delete.');
+            return;
+        }
+
+        fetch('/api/delete-emails', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ emailIds })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                emailIds.forEach(id => {
+                    document.querySelector(`input[value="${id}"]`).closest('tr').remove();
+                });
+            } else {
+                alert('Error deleting emails.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>

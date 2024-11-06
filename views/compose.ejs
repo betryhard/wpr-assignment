@@ -1,0 +1,13 @@
+<% layout('layout') -%>
+<h2>Compose Email</h2>
+<form action="/compose" method="POST">
+    <select name="recipientId" required>
+        <option value="">Select Recipient</option>
+        <% users.forEach(user => { %>
+            <option value="<%= user.id %>"><%= user.full_name %></option>
+        <% }) %>
+    </select>
+    <input type="text" name="subject" placeholder="Subject (optional)">
+    <textarea name="body" placeholder="Email body (optional)"></textarea>
+    <button type="submit">Send</button>
+</form>

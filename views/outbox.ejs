@@ -1,0 +1,20 @@
+<% layout('layout') -%>
+<h2>Outbox</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Recipient</th>
+            <th>Subject</th>
+            <th>Sent</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% emails.forEach(email => { %>
+            <tr>
+                <td><%= email.recipient_name %></td>
+                <td><a href="/detail/<%= email.id %>"><%= email.subject || '(no subject)' %></a></td>
+                <td><%= email.timestamp %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

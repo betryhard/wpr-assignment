@@ -1,0 +1,8 @@
+<% layout('layout') -%>
+<h2>Email Detail</h2>
+<p><strong>Subject:</strong> <%= email.subject || '(no subject)' %></p>
+<p><strong>Body:</strong> <%= email.body %></p>
+<% if (email.attachment) { %>
+    <a href="/download/<%= email.attachment %>">Download Attachment</a>
+<% } %> <!-- Removed the extra space here -->
+<a href="/inbox">Back to Inbox</a>

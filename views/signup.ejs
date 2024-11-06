@@ -1,0 +1,9 @@
+<% layout('layout') -%>
+<h2>Sign Up</h2>
+<form action="/signup" method="POST">
+    <input type="text" name="fullName" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="rePassword" placeholder="Re-enter Password" required>
+    <button type="submit">Create Account</button>
+</form>
