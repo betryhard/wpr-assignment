@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email System</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/public/home.css">
 </head>
 <body>
     <header>
-        <h1>Email System</h1>
-        <% if (user) { %>
-            <p>Welcome, <%= user.full_name %>! <a href="/signout">Sign out</a></p>
-        <% } %>
+        <h1 style="color: white;">Welcome to <span><%= fullName%></span></h1>
+      
+        <button class="signout-button"> <a href="/signin"></a>Sign out</button>
     </header>
-    <div class="container">
-        <%- body %>
-    </div>
+        <nav class="sidebar">
+            <h2 style="margin-top: 0px">Menu</h2>
+            <ul>
+                <li><a href="/compose">Compose</a></li>
+                <li><a href="/inbox">Inbox</a></li>
+                <li><a href="/outbox">Outbox</a></li>
+            </ul>
+        </nav>
 </body>
 </html>
